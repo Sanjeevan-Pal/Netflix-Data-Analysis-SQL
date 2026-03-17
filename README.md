@@ -33,7 +33,6 @@ The analysis covers:
 |---|---|
 | Source | [Kaggle — Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows) |
 | Total Records | 8807 |
-| Time Period | 2008 — 2021 |
 | Total Columns | 12 |
 
 ---
