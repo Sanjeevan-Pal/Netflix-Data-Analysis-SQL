@@ -16,7 +16,7 @@ The analysis covers:
 
 ---
 
-## 🗄️ Database Schema
+##  Database Schema
 **Database:** NETFLIX
 **Table:** netflix
 
