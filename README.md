@@ -1,5 +1,17 @@
 # Netflix Data Analysis Project using SQL
 
+##  Table of Contents
+- [Overview](#-overview)
+- [Dataset](#-dataset)
+- [Database Schema](#-database-schema)
+- [Data Cleaning](#-data-cleaning)
+- [Data Exploration](#-data-exploration)
+- [Business Problems](#-business-problems-solved)
+- [Key Findings](#-key-findings--conclusions)
+- [Author](#-author)
+
+---
+
 ## Overview
 
 This project involves an end-to-end data analysis of the Netflix dataset using Microsoft SQL Server (MSSQL). The goal is to explore the data, uncover key business insights, and answer real-world business questions through structured SQL queries.
@@ -13,6 +25,16 @@ The analysis covers:
 
 **Tool:** Microsoft SQL Server (MSSQL/SSMS)
 **Skills:** Data Cleaning, EDA, Advanced SQL, STRING_SPLIT, Window Functions, CTEs, Subqueries
+
+---
+
+##  Dataset
+| Detail | Info |
+|---|---|
+| Source | [Kaggle — Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows) |
+| Total Records | 8807 |
+| Time Period | 2008 — 2021 |
+| Total Columns | 12 |
 
 ---
 
