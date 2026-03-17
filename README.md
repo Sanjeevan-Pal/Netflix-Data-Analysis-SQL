@@ -1,14 +1,14 @@
 # Netflix Data Analysis Project using SQL
 
 ##  Table of Contents
-- [Overview](#-overview)
-- [Dataset](#-dataset)
-- [Database Schema](#-database-schema)
-- [Data Cleaning](#-data-cleaning)
-- [Data Exploration](#-data-exploration)
-- [Business Problems](#-business-problems-solved)
-- [Key Findings](#-key-findings--conclusions)
-- [Author](#-author)
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Database Schema](#database-schema)
+- [Data Cleaning](#data-cleaning)
+- [Data Exploration](#data-exploration)
+- [Business Problems](#business-problems-solved)
+- [Key Findings](#key-findings--conclusions)
+- [Author](#author)
 
 ---
 
