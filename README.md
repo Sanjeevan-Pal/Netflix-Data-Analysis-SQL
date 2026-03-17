@@ -420,7 +420,7 @@ GROUP BY Category;
 
 ---
 
-##  Author
+#  Author
 **Sanjeevan Pal**
 - This project is part of my portfolio, showcasing my SQL skills essential for data analyst roles.
 - [LinkedIn](https://www.linkedin.com/in/sanjeevan-pal-60444737b/) | [GitHub](https://github.com/Sanjeevan-Pal)
