@@ -7,6 +7,8 @@
 - [Data Cleaning](#data-cleaning)
 - [Data Exploration](#data-exploration)
 - [Business Problems](#business-problems-solved)
+- [SQL Concepts](#SQL-Concepts-used)
+- [Files](#Files)
 - [Key Findings](#key-findings--conclusions)
 - [Author](#author)
 
@@ -116,7 +118,7 @@ WHERE row_num > 1;
 
 ##  Data Exploration
 
-- **Total Content:** Checked total number of records in the dataset
+- **Total Content:** Checked the total number of records in the dataset
 ```sql
 SELECT COUNT(*) AS [Total Content]
 FROM netflix;
@@ -136,12 +138,15 @@ WHERE TABLE_NAME = 'netflix';
 - **Total Directors:** Counted unique directors
 ```sql
 SELECT COUNT(DISTINCT director) AS [Total Directors]
-FROM netflix;
+FROM netflix
+WHERE director!='Unknown';
 ```
 - **Total Countries:** Counted unique countries
 ```sql
-SELECT COUNT(DISTINCT(country)) AS [Total Countries]
-FROM netflix;
+SELECT COUNT(DISTINCT TRIM(value)) AS [Total Countries]
+FROM netflix
+CROSS APPLY STRING_SPLIT(country, ',')
+WHERE TRIM(value) != 'Unknown';
 ```
 
 ---
@@ -287,7 +292,7 @@ CROSS APPLY STRING_SPLIT(listed_in, ',')
 GROUP BY TRIM(value)
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** International Movies is the genre with the highest number of contents on Netflix
+- **Finding:** International Movies is the genre with the highest amount of content on Netflix
 
 ---
 
@@ -310,7 +315,7 @@ WHERE TRIM(value) = 'India'
 GROUP BY YEAR(CAST(date_added AS DATE))
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** Pre-COVID period was when India produced the most content on Netflix
+- **Finding:** The pre-COVID period was when India produced the most content on Netflix
 
 ---
 
