@@ -1,10 +1,17 @@
 -- NETFLIX DATA ANALYSIS USING SQL --
 
---CREATING A SEPARATE DATABSE FOR THIS DATA ANALYSIS OF NETFLIX DATASET USING SQL 
+-- PROJECT	: NETFLIX DATASET ANALYSIS
+-- AUTHOR	: SANJEEVAN
+-- DATE		: MARCH 2026
+-- TOOL		: SQL/MSSQL
+
+-- 1. SETTING UP THE DATABASE AND TABLE FOR DATA ANALYSIS
+
+-- Creating a Database for the Netflix Dataset Data Analysis
 CREATE DATABASE NETFLIX;
 USE NETFLIX;
 
---CREATING THE STRUCTURE OF THE TABLE 
+-- Creating the structure of the Table
 CREATE TABLE netflix (
 	show_id	VARCHAR(6),
 	type VARCHAR(10),
@@ -20,33 +27,36 @@ CREATE TABLE netflix (
 	description NVARCHAR(MAX)
 	);
 
--- INSERTING THE DATA INTO THE TABLE CREATED FROM THE REAL NETFLIX DATASET WHICH I IMPORTED IN THE MSSQL
+-- Inserting the data into the Table
 INSERT INTO netflix
 SELECT *
 FROM dbo.netflix_titles;
 
+-- Viewing the Table
 SELECT *
 FROM netflix;
 
 -- DATA CLEANING --
 
--- CHECKING FOR THE NULL VALUES --
+-- Checking for the NULL values --
+-- PURPOSE: For proper analysis of the Dataset NULL values must be handled accordingly
 SELECT 
-	COUNT(*) - COUNT(show_id) AS [show_id NULL],
-	COUNT(*) - COUNT(type) AS [type NULL],
-	COUNT(*) - COUNT(title) AS [title NULL],
-	COUNT(*) - COUNT(director) AS [director NULL],
-	COUNT(*) - COUNT(cast) AS [cast NULL],
-	COUNT(*) - COUNT(country) AS [country NULL],
-	COUNT(*) - COUNT(date_added) AS [date_added NULL],
-	COUNT(*) - COUNT(release_year) AS [release_year NULL],
-	COUNT(*) - COUNT(rating) AS [rating NULL],
-	COUNT(*) - COUNT(duration) AS [duration NULL],
-	COUNT(*) - COUNT(listed_in) AS [listed_in NULL],
-	COUNT(*) - COUNT(description) AS [description NULL]
+	COUNT(*) - COUNT(show_id) 		AS [show_id NULL],
+	COUNT(*) - COUNT(type) 			AS [type NULL],
+	COUNT(*) - COUNT(title) 		AS [title NULL],
+	COUNT(*) - COUNT(director) 		AS [director NULL],
+	COUNT(*) - COUNT(cast) 			AS [cast NULL],
+	COUNT(*) - COUNT(country) 		AS [country NULL],
+	COUNT(*) - COUNT(date_added) 	AS [date_added NULL],
+	COUNT(*) - COUNT(release_year) 	AS [release_year NULL],
+	COUNT(*) - COUNT(rating) 		AS [rating NULL],
+	COUNT(*) - COUNT(duration) 		AS [duration NULL],
+	COUNT(*) - COUNT(listed_in) 	AS [listed_in NULL],
+	COUNT(*) - COUNT(description) 	AS [description NULL]
 FROM netflix;
+-- FINDING: director(2634), cast(825), country(831) NULLs found
 
--- DELETING THE ROWS WHERE NULLS VALUES ARE PRESENT IN THE COLUMN OF date_added, rating, or in duration
+-- Deleting the NULL values where the counting of NULL values are low
 DELETE FROM netflix
 WHERE (
 	date_added IS NULL
@@ -56,7 +66,7 @@ WHERE (
 	duration IS NULL
 	);
 
--- UPDATING THE NULL VALUES OF directors, cast and country COLUMN
+-- Updating the NULL values with 'Unknown", where the NULL values can't be removed or dropped
 UPDATE netflix
 SET director='Unknown'
 WHERE director IS NULL;
@@ -69,58 +79,73 @@ UPDATE netflix
 SET country='Unknown'
 WHERE country IS NULL;
 
--- CHECKING FOR THE DUPLICATES VALUE
+-- Checking for the duplicate values
+-- PURPOSE: Duplicate values may hamper the data-analysis since it will increase duplicacy 
 SELECT *
 FROM (
 	SELECT *,
 	ROW_NUMBER() OVER(
-		PARtITION BY show_id
+		PARTITION BY show_id
 		ORDER BY show_id
 		) AS row_num
 	FROM netflix
 	) AS T1
 WHERE row_num>1;
--- NO DUPLICATES WERE FOUND
+-- FINDING: No duplicates are found
 
 --DATA EXPLORATION--
 
--- VIEWING THE TABLE, TO HAVE SOME OVERVIEW
+-- Viewing the table for an overview
 SELECT *
 FROM netflix;
 
---CHECKING THE TOTAL RECORDS IN THE NETFLIX DATSET
+--Checking for the number of rows in the table
+--PURPOSE: Helps in a better understanding of the Table
 SELECT COUNT(*) AS [Total Content]
 FROM netflix;
+-- FINDING: There is a total of 8790 rows after data-cleaning
 
---CHECKING FOR THE DIFFERENT KIND OF TYPES OF SHOWS 
+-- Checking for the different types of shows present on Netflix
+-- PURPOSE: Helps us find out the categories present on Netflix
 SELECT DISTINCT type AS [Type]
 FROM netflix;
+-- FINDING: There are 2 types of shows on Netflix
 
+-- Checking for the number of columns 
+-- PURPOSE: Helps in a better understanding of the Table
 SELECT COUNT(*) AS [Total Columns]
 FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = 'netflix';
+-- FINDING: There is a total of 12 columns
 
--- CHECKING FOR THE NUMBER OF DIRECTORS
+-- Checking for the number of directors
+-- PURPOSE: Helps us to find all the directors
 SELECT COUNT(DISTINCT director) AS [Total Directors]
-FROM netflix;
+FROM netflix
+WHERE director!='Unknown' ;
+-- FINDING: There is a total of 4524 directors
 
 -- CHECKING FOR THE NUMBER OF COUNTRIES
-SELECT COUNT(DISTINCT(country)) AS [Total Countries]
-FROM netflix;
+-- PURPOSE: Helps us to find the number of countries producing films
+SELECT COUNT(DISTINCT TRIM(value)) AS [Total Countries]
+FROM netflix
+CROSS APPLY STRING_SPLIT(country, ',')
+WHERE TRIM(value) != 'Unknown';;
+-- FINDING: There are only 123 countries producing films, which is 63% of the total countries
 
 -- DATA ANALYSIS AND BUSINESS ANALYSIS
 
--- Q1. COUNT THE NUMBER OF MOVIES VS TV SHOWS
--- THIS HELPS IN FIGURING OUT THE DISTRIBUTION OF THE SHOWS IN NETFLIX
+-- Q1. Count of Movies vs TV Shows
+-- PURPOSE: HELPS IN FIGURING OUT THE DISTRIBUTION OF THE SHOWS IN NETFLIX
 SELECT 
 	type AS [Type], 
 	COUNT(*) AS [Total Counts]
 FROM netflix
 GROUP BY type;
--- HERE, WE CAN SEE THAT THE NUMBER OF MOVIE IS JUST 300% MORE THAN THE NUMBER OF TV SHOWS
+-- FINDING: Movies dominate Netflix with approximately 3x more content than TV Shows
 
--- Q2. FIND THE MOST COMMON RATING FOR MOVIES AND TV SHOWS
--- HELPS US TO FIND THE UNDER WHAT RATING DOES MOST OF THE TV SHOWS AND MOVIES LIE
+-- Q2. Most Common Rating for Movies and TV Shows
+-- PURPOSE: Helps us to find out the most used ratings 
 SELECT *
 FROM (
 	SELECT 
@@ -137,18 +162,18 @@ FROM (
 		rating
 	) AS T1
 WHERE Rank=1;
--- IT CAN BE SEEN THAT MOST RATING IN MOVIES AND TV SHOWS ARE TV-MA AND TV-MA RESPECTIVELY, SO TV-MA HAS BEEN MOST USED RATING IN BOTH OF THE TYPES
+-- FINDING: TV-MA is the most common rating for both Movies and TV Shows on Netflix
 
--- Q3. LIST ALL MOVIES RELEASED IN A YEAR
--- HELPS US TO FIND OUT IN WHICH YEAR HOW MANY MOVIES GOT RELEASED
+-- Q3. Movies Released Per Year
+-- PURPOSE: Find how many movies got released each year
 SELECT release_year AS [Release Year], COUNT(*) AS [Total Count]
 FROM netflix
 GROUP BY release_year
 ORDER BY release_year;
--- HERE WE CAN FIGURE IT OUT THAT THE NUMBER OF MOVIES RELEASED PER YEAR HAS BEEN INCREASING PER YEAR GRADUALLY
+-- FINDING: The number of movies released per year has been gradually increasing over time
 
--- Q4. FIND THE TOP 5 COUNTRIES WITH MOST CONTENT ON NETFLIX
--- HELPS TO FIND OUT WHICH TOP COUNTRIES PRODUCES THE MOST NUMBER OF MOVIES
+-- Q4. Top 5 Countries with the most content on Netflix
+-- PURPOSE: Identify which countries produce the most content
 SELECT TOP 5
 	TRIM(value) AS [Country],
 	COUNT(*) AS [Total Movies]
@@ -157,25 +182,27 @@ CROSS APPLY STRING_SPLIT(country, ',')
 GROUP BY TRIM(value)
 HAVING TRIM(value) != 'Unknown'
 ORDER BY COUNT(*) DESC;
--- FROM HERE WE CAN FIGURE THIS OUT THAT UNITED-STATES, INDIA, UNITED-KINGDOM, CANADA, AND FRANCE ARE TOP 5 MOVIE PRODUCING COUNTRY IN THE WHOLE WORLD, WHILE USA LEADING THE LIST MAJORILY
+-- FINDING: United States leads by a large margin, followed by India, United Kingdom, Canada, and France
 
--- Q5 IDENTIFY THE LONGEST MOVIE
+-- Q5. Identify the Longest Movie
+-- PURPOSE: Find the movie with the highest duration
 SELECT top 1 
 	title AS [MOVIE],
 	CAST(REPLACE(duration,'min','') AS INT) AS [Duration]
 FROM netflix
 WHERE type = 'movie'
 ORDER BY CAST(REPLACE(duration,'min','') AS INT) DESC;
--- FROM HERE WE CAN SEE THAT 'Black Mirror: Bandersnatch' IS THE MOVIE WITH HIGHEST DURATION
+-- FINDING: 'Black Mirror: Bandersnatch' is the longest movie on Netflix
 
--- Q6. FIND CONTENT ADDED IN THE LAST 5 YEARS
+-- Q6. Content Released Between 2017 and 2021
+-- PURPOSE: Find content released in a specific time range
 SELECT *
 FROM netflix
 WHERE release_year BETWEEN 2017 AND 2021
 ORDER BY release_year;
 
--- Q7. FIND ALL THE MOVIES DIRECTED BY RAJIV CHILAKA 
--- HELPS US TO SEE THE MOVIE DIRECTED BY RAJIV CHILAKA
+-- Q7. All Movies Directed by Rajiv Chilaka
+-- PURPOSE: Find all movies directed by a specific director
 SELECT 
 	title AS [MOVIE NAME]
 FROM netflix
@@ -184,10 +211,10 @@ WHERE
 	TRIM(value) = 'Rajiv Chilaka'
 	AND 
 	type = 'Movie';
--- SO, WE CAN SEE THAT THERE ARE TOTAL OF 19 MOVIES WHICH ARE DIRECTED BY RAJIV CHILAKA
+-- FINDING: Rajiv Chilaka has directed 19 movies on Netflix
 
--- Q8. LIST ALL THE TV SHOWS WHICH HAVE MORE THAN 5 SEASONS
--- HELPS US FIND OUT THE SERIES WHICH HAVE SO LONG STORY AND MORE SEASONS
+-- Q8. TV Shows with More Than 5 Seasons
+-- PURPOSE: Find long-running series with extensive storylines
 SELECT title AS [Series Name]
 FROM NETFLIX
 WHERE 
@@ -195,10 +222,10 @@ WHERE
 	AND 
 	CAST(TRIM(REPLACE(REPLACE(duration,'Seasons',''),'Season','')) AS INT) > 5
 ORDER BY duration DESC;
--- WE CAN FIGURE THIS OUT TTHERE ARE TOTAL OF 96 TV SHOWS WHICH ARE HAVING MORE THAN 5 SEASONS
+-- FINDING: 96 TV Shows have more than 5 seasons on Netflix
 
--- Q9. COUNT THE NUMBERN OF CONTENT ITEMS IN EACH GENRE
--- HELPS US TO FIGURE OUT WHICH GENRE HAS THE MOST CONTENT IN IT 
+-- Q9. Content Count by Genre
+-- PURPOSE: Figure out which genre has the most content
 SELECT
 	TRIM(value) AS [Genre],
 	COUNT(*) AS [Total Content]
@@ -206,9 +233,10 @@ FROM netflix
 CROSS APPLY STRING_SPLIT(listed_in,',')
 GROUP BY TRIM(value)
 ORDER BY COUNT(*) DESC;
--- HERE WE CAN SEE ANY ONE TV SHOW OR MOVIE IS LISTED IN MULTIPLE GENRES, AND AMONG THEM INTERNATIONAL MOVIES IS THE ONE WHICH IS HAVING THE HIGHEST NUMBER OF CONTENTS
+-- International Movies is the genre with the highest number of content on Netflix
 
--- Q10. FIND EACH YEAR AND THE AVERAGE NUMBER OF CONTENT RELEASE BY INDIA ON NETFLIX RETURN TOP 5 YEAR WITH HIGHEST AVERAGE CONTENT RELEASE
+-- Q10. Top 5 Years — Average Content Released by India
+-- PURPOSE: Find years when India added the most content
 SELECT TOP 5
 	YEAR(CAST(date_added AS DATE)) AS [Year Released],
 	COUNT(*) AS [Total Content],
@@ -228,7 +256,7 @@ CROSS APPLY STRING_SPLIT(country,',')
 WHERE TRIM(value) = 'India'
 GROUP BY YEAR(CAST(date_added AS DATE))
 ORDER BY COUNT(*) DESC;
--- IT CLEARS THAT PRE-COVID WAS THE PERIOD WHEN INDIA PRODUCED MOST CONTENTS
+-- FINDING: The pre-COVID period was when India produced the most content on Netflix
 
 -- Q11. LIST ALL THE MOVIES THAT ARE LISTED IN DOCUMENTARIES
 -- HELPS TO FIGURE OUT THE MOVIES WHICH ARE ORIGINALLY A DOCUMENTRY
