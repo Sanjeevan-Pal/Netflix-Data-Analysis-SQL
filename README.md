@@ -423,6 +423,7 @@ GROUP BY Category;
 |---|---|
 | `NETFLIX.sql` | All SQL queries |
 | `netflix_titles.csv` | Raw Netflix dataset |
+| `RESULTS` | Screenshot of results |
 
 ---
 
