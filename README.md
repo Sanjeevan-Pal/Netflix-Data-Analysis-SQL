@@ -79,7 +79,7 @@ SELECT
     COUNT(*) - COUNT(description)  AS [description NULL]
 FROM netflix;
 ```
-- **Finding:** `director` had the highest NULLs (~30%), followed by `cast` and `country`
+**Finding:** `director` had the highest NULLs (~30%), followed by `cast` and `country`
 
 ###  Deleting critical NULL rows
 Rows where `date_added`, `rating`, or `duration` was NULL were deleted as they are critical for analysis
@@ -112,7 +112,7 @@ SELECT * FROM (
 ) AS T1
 WHERE row_num > 1;
 ```
-- **Finding:** No duplicates were found in the dataset 
+**Finding:** No duplicates were found in the dataset 
 
 ---
 
@@ -163,7 +163,7 @@ FROM netflix
 GROUP BY type
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** Movies dominate Netflix with approximately 3x more content than TV Shows
+**Finding:** Movies dominate Netflix with approximately 3x more content than TV Shows
 
 ---
 
@@ -183,7 +183,7 @@ SELECT * FROM (
 ) AS T1
 WHERE Rank = 1;
 ```
-- **Finding:** TV-MA is the most common rating for both Movies and TV Shows on Netflix
+**Finding:** TV-MA is the most common rating for both Movies and TV Shows on Netflix
 
 ---
 
@@ -197,7 +197,7 @@ FROM netflix
 GROUP BY release_year
 ORDER BY release_year;
 ```
-- **Finding:** Number of movies released per year has been gradually increasing over time
+ **Finding:** Number of movies released per year has been gradually increasing over time
 
 ---
 
@@ -213,7 +213,7 @@ GROUP BY TRIM(value)
 HAVING TRIM(value) != 'Unknown'
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** United States leads by a large margin, followed by India, United Kingdom, Canada, and France
+**Finding:** United States leads by a large margin, followed by India, United Kingdom, Canada, and France
 
 ---
 
@@ -227,7 +227,7 @@ FROM netflix
 WHERE type = 'movie'
 ORDER BY CAST(REPLACE(duration, 'min', '') AS INT) DESC;
 ```
-- **Finding:** 'Black Mirror: Bandersnatch' is the longest movie on Netflix
+**Finding:** 'Black Mirror: Bandersnatch' is the longest movie on Netflix
 
 ---
 
@@ -252,7 +252,7 @@ WHERE
     TRIM(value) = 'Rajiv Chilaka'
     AND type    = 'Movie';
 ```
-- **Finding:** Rajiv Chilaka has directed 19 movies on Netflix
+**Finding:** Rajiv Chilaka has directed 19 movies on Netflix
 
 ---
 
@@ -277,7 +277,7 @@ ORDER BY
         ) AS INT
     ) DESC;
 ```
-- **Finding:** 96 TV Shows have more than 5 seasons on Netflix
+**Finding:** 96 TV Shows have more than 5 seasons on Netflix
 
 ---
 
@@ -292,7 +292,7 @@ CROSS APPLY STRING_SPLIT(listed_in, ',')
 GROUP BY TRIM(value)
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** International Movies is the genre with the highest amount of content on Netflix
+**Finding:** International Movies is the genre with the highest amount of content on Netflix
 
 ---
 
@@ -315,7 +315,7 @@ WHERE TRIM(value) = 'India'
 GROUP BY YEAR(CAST(date_added AS DATE))
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** The pre-COVID period was when India produced the most content on Netflix
+**Finding:** The pre-COVID period was when India produced the most content on Netflix
 
 ---
 
@@ -327,7 +327,7 @@ FROM netflix
 CROSS APPLY STRING_SPLIT(listed_in, ',')
 WHERE TRIM(Value) = 'Documentaries';
 ```
-- **Finding:** There are 869 documentaries on Netflix
+**Finding:** There are 869 documentaries on Netflix
 
 ---
 
@@ -354,7 +354,7 @@ WHERE
     AND release_year BETWEEN 2012 AND 2021
 GROUP BY TRIM(Value);
 ```
-- **Finding:** Salman Khan appeared in only 3 movies in the last 10 years on Netflix
+**Finding:** Salman Khan appeared in only 3 movies in the last 10 years on Netflix
 
 ---
 
@@ -374,7 +374,7 @@ WHERE
 GROUP BY TRIM(a.Value)
 ORDER BY COUNT(*) DESC;
 ```
-- **Finding:** Anupam Kher has the most appearances in Indian movies, followed by Shah Rukh Khan
+**Finding:** Anupam Kher has the most appearances in Indian movies, followed by Shah Rukh Khan
 
 ---
 
@@ -398,7 +398,7 @@ SELECT
 FROM CategoryCTE
 GROUP BY Category;
 ```
-- **Finding:** ~96% of Netflix content is categorized as 'Good' while only ~4% contains violent keywords
+**Finding:** ~96% of Netflix content is categorized as 'Good' while only ~4% contains violent keywords
 
 ---
 
