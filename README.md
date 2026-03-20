@@ -33,7 +33,7 @@ The analysis covers:
 ##  Dataset
 | Detail | Info |
 |---|---|
-| Source | [Kaggle — Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows) |
+| Source | [Kaggle-Netflix Movies and TV Shows](https://www.kaggle.com/datasets/shivamb/netflix-shows) |
 | Total Records | 8807 |
 | Total Columns | 12 |
 
