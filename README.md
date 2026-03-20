@@ -422,7 +422,7 @@ GROUP BY Category;
 | File | Description |
 |---|---|
 | [NETFLIX.sql](https://github.com/Sanjeevan-Pal/Netflix-Data-Analysis-SQL/blob/main/NETFLIX.sql) | All SQL queries |
-| `netflix_titles.csv` | Raw Netflix dataset |
+| [netflix_titles.csv](https://github.com/Sanjeevan-Pal/Netflix-Data-Analysis-SQL/blob/main/netflix_titles.csv) | Raw Netflix dataset |
 | `RESULTS` | Screenshot of results |
 
 ---
