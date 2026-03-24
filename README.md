@@ -402,6 +402,8 @@ ORDER BY COUNT(*) DESC;
 ```
 **Finding:** Anupam Kher has the most appearances in Indian movies, followed by Shah Rukh Khan
 
+![Q14 Result](RESULTS/Q14_Actor_Most_Movies.png)
+
 ---
 
 ### Q15. Content Categorized by Violent Keywords
