@@ -326,7 +326,7 @@ SELECT TOP 5
             FROM netflix
             CROSS APPLY STRING_SPLIT(country, ',')
             WHERE TRIM(value) = 'India'
-        ), 2)                      AS [Percentage]
+        ), 2) AS [Percentage]
 FROM netflix
 CROSS APPLY STRING_SPLIT(country, ',')
 WHERE TRIM(value) = 'India'
@@ -334,6 +334,8 @@ GROUP BY YEAR(CAST(date_added AS DATE))
 ORDER BY COUNT(*) DESC;
 ```
 **Finding:** The pre-COVID period was when India produced the most content on Netflix
+
+![Q10 Result](RESULTS/Q10_Best_5_Years_for_India.png)
 
 ---
 
