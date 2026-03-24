@@ -164,6 +164,7 @@ GROUP BY type
 ORDER BY COUNT(*) DESC;
 ```
 **Finding:** Movies dominate Netflix with approximately 3x more content than TV Shows
+
 ![Q1 Result](RESULTS/Q1_Type_Distribution.png)
 
 ---
@@ -185,6 +186,7 @@ SELECT * FROM (
 WHERE Rank = 1;
 ```
 **Finding:** TV-MA is the most common rating for both Movies and TV Shows on Netflix
+
 ![Q2 Result](RESULTS/Q2_Most_Used_Rating.png)
 
 ---
@@ -200,6 +202,7 @@ GROUP BY release_year
 ORDER BY release_year;
 ```
  **Finding:** Number of movies released per year has been gradually increasing over time
+ 
  ![Q3 Result](RESULTS/Q3_Movie_Released_per_year.png)
 
 ---
@@ -218,6 +221,8 @@ ORDER BY COUNT(*) DESC;
 ```
 **Finding:** United States leads by a large margin, followed by India, United Kingdom, Canada, and France
 
+![Q5 Result](RESULTS/Q4_Top_Country_with_Content.png)
+
 ---
 
 ### Q5. Identify the Longest Movie
@@ -231,6 +236,8 @@ WHERE type = 'movie'
 ORDER BY CAST(REPLACE(duration, 'min', '') AS INT) DESC;
 ```
 **Finding:** 'Black Mirror: Bandersnatch' is the longest movie on Netflix
+
+![Q5 Result](RESULTS/Q5_Longest_Movie.png)
 
 ---
 
