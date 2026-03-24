@@ -349,6 +349,8 @@ WHERE TRIM(Value) = 'Documentaries';
 ```
 **Finding:** There are 869 documentaries on Netflix
 
+![Q11 Result](RESULTS/Q11_Documentry_Genre.png)
+
 ---
 
 ### Q12. Content Without a Director
