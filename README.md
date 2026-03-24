@@ -380,6 +380,8 @@ GROUP BY TRIM(Value);
 ```
 **Finding:** Salman Khan appeared in only 3 movies in the last 10 years on Netflix
 
+![Q13 Result](RESULTS/Q13_Salman_Khan_Appearances.png)
+
 ---
 
 ### Q14. Top 10 Actors in Indian Movies
