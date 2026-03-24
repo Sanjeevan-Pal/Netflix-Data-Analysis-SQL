@@ -428,6 +428,8 @@ GROUP BY Category;
 ```
 **Finding:** ~96% of Netflix content is categorized as 'Good' while only ~4% contains violent keywords
 
+![Q15 Result](RESULTS/Q15_Categorization.png)
+
 ---
 
 ##  SQL Concepts Used
