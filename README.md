@@ -185,6 +185,7 @@ SELECT * FROM (
 WHERE Rank = 1;
 ```
 **Finding:** TV-MA is the most common rating for both Movies and TV Shows on Netflix
+![Q2 Result](RESULTS/Q2_Most_Used_Rating.png)
 
 ---
 
@@ -199,6 +200,7 @@ GROUP BY release_year
 ORDER BY release_year;
 ```
  **Finding:** Number of movies released per year has been gradually increasing over time
+ ![Q3 Result](Q3_Movie_Released_per_year.png)
 
 ---
 
