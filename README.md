@@ -266,6 +266,8 @@ WHERE
 ```
 **Finding:** Rajiv Chilaka has directed 19 movies on Netflix
 
+![Q7 Results](RESULTS/Q7_Rajiv_Chilaka_movies.png)
+
 ---
 
 ### Q8. TV Shows with More Than 5 Seasons
