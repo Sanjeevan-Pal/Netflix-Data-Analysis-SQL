@@ -200,7 +200,7 @@ GROUP BY release_year
 ORDER BY release_year;
 ```
  **Finding:** Number of movies released per year has been gradually increasing over time
- ![Q3 Result](Q3_Movie_Released_per_year.png)
+ ![Q3 Result](RESULTS/Q3_Movie_Released_per_year.png)
 
 ---
 
