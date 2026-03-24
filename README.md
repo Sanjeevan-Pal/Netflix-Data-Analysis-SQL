@@ -310,6 +310,8 @@ ORDER BY COUNT(*) DESC;
 ```
 **Finding:** International Movies is the genre with the highest amount of content on Netflix
 
+![Q9 Result](RESULTS/Q9_Genre_Count.png)
+
 ---
 
 ### Q10. Top 5 Years — Average Content Released by India
