@@ -293,6 +293,8 @@ ORDER BY
 ```
 **Finding:** 96 TV Shows have more than 5 seasons on Netflix
 
+![Q8 Result](RESULTS/Q8_Long_Series.png)
+
 ---
 
 ### Q9. Content Count by Genre
