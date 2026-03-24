@@ -361,6 +361,8 @@ FROM netflix
 WHERE director = 'Unknown';
 ```
 
+![Q12 Result](RESULTS/Q12_Unknown_Directors.png)
+
 ---
 
 ### Q13. Salman Khan Movies in Last 10 Years
