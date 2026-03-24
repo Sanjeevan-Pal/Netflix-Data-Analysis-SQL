@@ -82,7 +82,7 @@ FROM netflix;
 **Finding:** `director` had the highest NULLs (~30%), followed by `cast` and `country`
 
 ###  Deleting critical NULL rows
-Rows where `date_added`, `rating`, or `duration` was NULL were deleted as they are critical for analysis
+Rows where `date_added`, `rating`, or `duration` were NULL were deleted as they are critical for analysis
 ```sql
 DELETE FROM netflix
 WHERE (
@@ -164,6 +164,7 @@ GROUP BY type
 ORDER BY COUNT(*) DESC;
 ```
 **Finding:** Movies dominate Netflix with approximately 3x more content than TV Shows
+![Q1 Result](RESULTS/Q1_Type_Distribution.png)
 
 ---
 
