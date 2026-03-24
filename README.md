@@ -250,6 +250,8 @@ WHERE release_year BETWEEN 2017 AND 2021
 ORDER BY release_year;
 ```
 
+![Q6 Result](RESULTS/Q6_Between_2017_2022.png)
+
 ---
 
 ### Q7. All Movies Directed by Rajiv Chilaka
